@@ -1,0 +1,41 @@
+<div class="sort-controls">
+    <button (click)="sortUsers('name')" class="button name-sort-btn">
+        Сортировка по имени
+        @if (sortBy === 'name') {
+            <fa-icon [icon]="['fas', sortDirection === 'asc' ? 'sort-up' : 'sort-down']"></fa-icon>
+        }
+    </button>
+
+    <button (click)="sortUsers('email')" class="button email-sort-btn">
+        Сортировка по E-mail
+
+        @if (sortBy === 'email') {
+            <fa-icon [icon]="['fas', sortDirection === 'asc' ? 'sort-up' : 'sort-down']"></fa-icon>
+        }
+    </button>
+
+    <button (click)="resetSorting()"
+            class="button reset-sort-btn">
+        Сброс
+        <fa-icon [icon]="['fas', 'refresh']"></fa-icon>
+    </button>
+
+    <input [formControl]="filterTextControl" class="filter-input" placeholder="Фильтрация по имени или email"
+           type="text">
+</div>
+
+<div class="users-wrapper">
+    @if (userList().length) {
+        @for (user of filteredList(); track user.id) {
+            <app-user-card [userInput]="user"></app-user-card>
+        } @empty {
+            <p>Пользователи не найдены!</p>
+        }
+    } @else {
+        <div class="loader-wrapper">
+            <fa-icon [icon]="['fas', 'circle-notch']" [animation]="'spin'" [size]="'2xl'"></fa-icon>
+            Загрузка данных...
+        </div>
+    }
+</div>
+

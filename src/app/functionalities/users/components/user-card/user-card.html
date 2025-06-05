@@ -1,0 +1,17 @@
+@let user = userInput();
+
+<div class="user">
+  <span class="user-name">
+    {{ user.id }}. {{ user.name }}
+  </span>
+
+    <div class="user-data-wrapper">
+        <div>
+            <a [href]="'mailto:' + user.email">{{ user.email }}</a>
+        </div>
+
+        <p class="user-city">
+            City: {{ user.address.city }}
+        </p>
+    </div>
+</div>
